@@ -102,7 +102,7 @@ app.on('activate', function () {
 // code. You can also put them in separate files and require them here.
 ```
 
-In the ```public``` directory create a ```preload.ts``` script. This does not have to have anything, you could also remove the preload from the BrowserWindow settings to not have one. Now, there are a couple commands to run the project and build it. They are listed here:
+In the ```public``` directory create a ```preload.ts``` script. This does not have to have anything, you could also remove the preload from the BrowserWindow settings to not have one. Now, there are a couple commands to run the project and build it (package.json). They are listed here:
 ```json
 "electron:build": "vite build -c vite.config.electron.js", // Do not run directly
 "electron": "set LOCAL_HOST=http://localhost:5173 && electron dist/electron.js", // Run after npm run build:dev
@@ -110,6 +110,17 @@ In the ```public``` directory create a ```preload.ts``` script. This does not ha
 "build:dev": "npm run build && npm run electron:build && npm run dev", // Run this to recompile the app and build it, then run npm run electron to get the electron window.
 ```
 
+Also in the ```package.json``` make sure to add these lines:
+```json
+"main": "./src-electron/electron.ts",
+"build": {
+    "files": [
+      "dist/**/*"
+    ]
+},
+```
+This enables the packaging of the app to work properly and not show a blank screen when opening.
+
 This should be all that is needed to run the electron app and build it with vite and react. I have not tested with the other vite frameworks but they should work the same. You can also install sass, scss, tailwindcss, etc. and it all should just work if setup properly according to their documentation.
 
-# DISCLAIMER: I am not liable for any security issues, this is simply a guide on how to setup electron and vite, please refer to their documentation for proper security protocols.
+# DISCLAIMER: I am not liable for any security issues, this is simply a guide on how to set up electron and vite, please refer to their documentation for proper security protocols.
